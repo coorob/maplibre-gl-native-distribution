@@ -13,7 +13,7 @@ let package = Package(
     targets: [
         .binaryTarget(
             name: "MapLibre",
-            url: "https://github.com/coorob/maplibre-gl-native-distribution/releases/download/6.26.0-traska.2/MapLibre.xcframework.zip",
-            checksum: "91c43fd072e4e90f8943e7b8aa27a36544e11cd67c36032b0464de63ee2bf8f5")
+            url: "https://github.com/coorob/maplibre-gl-native-distribution/releases/download/6.26.0-traska.3/MapLibre.xcframework.zip",
+            checksum: "127bf1cae2b2a50c2e240fb0bb329657e3a6a91968046fb5c11b8885fc8e6f8c")
     ]
 )

@@ -15,6 +15,7 @@ SwiftPM package — same product name (`MapLibre`), same public API.
 
 | Tag | Base | Fix | Slices |
 |-----|------|-----|--------|
+| `6.26.0-traska.3` | MapLibre Native [`ios-v6.26.0`](https://github.com/maplibre/maplibre-native/releases/tag/ios-v6.26.0) + Traska terrain work [`6a719c8c`](https://github.com/coorob/maplibre-native/commit/6a719c8c) | PMTiles `FileSource` teardown use-after-free; native Metal 3D terrain with adaptive drape target streaming | `ios-arm64` (device) + `ios-arm64_x86_64-simulator` |
 | `6.26.0-traska.2` | MapLibre Native [`ios-v6.26.0`](https://github.com/maplibre/maplibre-native/releases/tag/ios-v6.26.0) + Traska terrain work [`ebd7ad5b`](https://github.com/coorob/maplibre-native/commit/ebd7ad5b) | PMTiles `FileSource` teardown use-after-free; native Metal 3D terrain drape handoff | `ios-arm64` (device) + `ios-arm64_x86_64-simulator` |
 | `6.26.0-traska.1` | MapLibre Native [`ios-v6.26.0`](https://github.com/maplibre/maplibre-native/releases/tag/ios-v6.26.0) | PMTiles `FileSource` teardown use-after-free | `ios-arm64` (device) + `ios-arm64_x86_64-simulator` |
 
@@ -26,7 +27,7 @@ SwiftPM package — same product name (`MapLibre`), same public API.
 // Package.swift
 dependencies: [
     .package(url: "https://github.com/coorob/maplibre-gl-native-distribution.git",
-             exact: "6.26.0-traska.2"),
+             exact: "6.26.0-traska.3"),
 ],
 targets: [
     .target(name: "YourApp", dependencies: [
@@ -36,7 +37,7 @@ targets: [
 ```
 
 Or in Xcode: **File ▸ Add Package Dependencies…**, paste the URL, choose **Exact Version**
-`6.26.0-traska.2`. The repo is public, so SwiftPM downloads the framework anonymously — no auth.
+`6.26.0-traska.3`. The repo is public, so SwiftPM downloads the framework anonymously — no auth.
 
 ### React Native / Expo app (`@maplibre/maplibre-react-native`)
 
@@ -45,10 +46,10 @@ its podspec reads (`$MLRN_SPM_SPEC` / `$MLRN_NATIVE_VERSION`) **before** `pod in
 e.g. at the top of the generated `Podfile`:
 
 ```ruby
-$MLRN_NATIVE_VERSION = "6.26.0-traska.2"
+$MLRN_NATIVE_VERSION = "6.26.0-traska.3"
 $MLRN_SPM_SPEC = {
   url: "https://github.com/coorob/maplibre-gl-native-distribution",
-  requirement: { kind: "exactVersion", version: "6.26.0-traska.2" },
+  requirement: { kind: "exactVersion", version: "6.26.0-traska.3" },
   product_name: "MapLibre",
 }
 ```
@@ -79,8 +80,8 @@ bazel build //platform/ios:MapLibre.dynamic \
   --//:renderer=metal --compilation_mode=opt --copt=-g --copt=-Oz --strip=never
 ZIP=bazel-bin/platform/ios/MapLibre.dynamic.xcframework.zip
 swift package compute-checksum "$ZIP"                       # new checksum
-gh release create 6.26.0-traska.2 "$ZIP" --repo coorob/maplibre-gl-native-distribution
-# then bump url + checksum in Package.swift, commit, `git tag 6.26.0-traska.2`, push --tags
+gh release create 6.26.0-traska.3 "$ZIP" --repo coorob/maplibre-gl-native-distribution
+# then bump url + checksum in Package.swift, commit, `git tag 6.26.0-traska.3`, push --tags
 ```
 
 SwiftPM resolves `Package.swift` **at the git tag**, reads its `.binaryTarget` URL, downloads the
