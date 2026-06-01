@@ -15,6 +15,7 @@ SwiftPM package — same product name (`MapLibre`), same public API.
 
 | Tag | Base | Fix | Slices |
 |-----|------|-----|--------|
+| `6.26.0-traska.2` | MapLibre Native [`ios-v6.26.0`](https://github.com/maplibre/maplibre-native/releases/tag/ios-v6.26.0) + Traska terrain work [`ebd7ad5b`](https://github.com/coorob/maplibre-native/commit/ebd7ad5b) | PMTiles `FileSource` teardown use-after-free; native Metal 3D terrain drape handoff | `ios-arm64` (device) + `ios-arm64_x86_64-simulator` |
 | `6.26.0-traska.1` | MapLibre Native [`ios-v6.26.0`](https://github.com/maplibre/maplibre-native/releases/tag/ios-v6.26.0) | PMTiles `FileSource` teardown use-after-free | `ios-arm64` (device) + `ios-arm64_x86_64-simulator` |
 
 ## Use it
@@ -25,7 +26,7 @@ SwiftPM package — same product name (`MapLibre`), same public API.
 // Package.swift
 dependencies: [
     .package(url: "https://github.com/coorob/maplibre-gl-native-distribution.git",
-             exact: "6.26.0-traska.1"),
+             exact: "6.26.0-traska.2"),
 ],
 targets: [
     .target(name: "YourApp", dependencies: [
@@ -35,7 +36,7 @@ targets: [
 ```
 
 Or in Xcode: **File ▸ Add Package Dependencies…**, paste the URL, choose **Exact Version**
-`6.26.0-traska.1`. The repo is public, so SwiftPM downloads the framework anonymously — no auth.
+`6.26.0-traska.2`. The repo is public, so SwiftPM downloads the framework anonymously — no auth.
 
 ### React Native / Expo app (`@maplibre/maplibre-react-native`)
 
@@ -44,10 +45,10 @@ its podspec reads (`$MLRN_SPM_SPEC` / `$MLRN_NATIVE_VERSION`) **before** `pod in
 e.g. at the top of the generated `Podfile`:
 
 ```ruby
-$MLRN_NATIVE_VERSION = "6.26.0-traska.1"
+$MLRN_NATIVE_VERSION = "6.26.0-traska.2"
 $MLRN_SPM_SPEC = {
   url: "https://github.com/coorob/maplibre-gl-native-distribution",
-  requirement: { kind: "exactVersion", version: "6.26.0-traska.1" },
+  requirement: { kind: "exactVersion", version: "6.26.0-traska.2" },
   product_name: "MapLibre",
 }
 ```
