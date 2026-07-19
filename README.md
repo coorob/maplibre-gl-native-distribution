@@ -14,6 +14,7 @@ SwiftPM package — same product name (`MapLibre`), same public API.
 
 | Tag | Base | Fix | Slices |
 |-----|------|-----|--------|
+| `6.27.0-traska.78` | MapLibre Native [`ios-v6.27.0`](https://github.com/maplibre/maplibre-native/releases/tag/ios-v6.27.0) + Traska terrain work [`d709f873`](https://github.com/coorob/maplibre-native/commit/d709f8737d93059990dd25352c7281969c470c2c) | Bounded RasterDEM cover-hold retention with deterministic parent/child fallback selection; preserves fade holds and complete terrain-cover swaps while preventing historical DEM covers from growing without limit | `ios-arm64` (device) + `ios-arm64_x86_64-simulator` |
 | `6.26.0-traska.10` | MapLibre Native [`ios-v6.26.0`](https://github.com/maplibre/maplibre-native/releases/tag/ios-v6.26.0) + Traska terrain work [`1f80926a`](https://github.com/coorob/maplibre-native/commit/1f80926a) | PMTiles fixes; native Metal 3D terrain with parent drape targets, padded overscan targets, Metal draw-segment guard, and an iOS pitch-around-anchor camera API for stable terrain tilt controls | `ios-arm64` (device) + `ios-arm64_x86_64-simulator` |
 | `6.26.0-traska.9` | MapLibre Native [`ios-v6.26.0`](https://github.com/maplibre/maplibre-native/releases/tag/ios-v6.26.0) + Traska terrain work [`1b159841`](https://github.com/coorob/maplibre-native/commit/1b159841) | PMTiles fixes; native Metal 3D terrain with parent drape targets, padded overscan targets for fast camera movement, and a Metal draw-segment guard | `ios-arm64` (device) + `ios-arm64_x86_64-simulator` |
 | `6.26.0-traska.8` | MapLibre Native [`ios-v6.26.0`](https://github.com/maplibre/maplibre-native/releases/tag/ios-v6.26.0) + Traska terrain work [`1b159841`](https://github.com/coorob/maplibre-native/commit/1b159841) | Superseded by `.9`; this tag accidentally published the static XCFramework, which SwiftPM/Xcode rejected when embedding into Traska | `ios-arm64` (device) + `ios-arm64_x86_64-simulator` |
@@ -33,7 +34,7 @@ SwiftPM package — same product name (`MapLibre`), same public API.
 // Package.swift
 dependencies: [
     .package(url: "https://github.com/coorob/maplibre-gl-native-distribution.git",
-             exact: "6.26.0-traska.10"),
+             exact: "6.27.0-traska.78"),
 ],
 targets: [
     .target(name: "YourApp", dependencies: [
@@ -43,7 +44,7 @@ targets: [
 ```
 
 Or in Xcode: **File ▸ Add Package Dependencies…**, paste the URL, choose **Exact Version**
-`6.26.0-traska.10`. The repo is public, so SwiftPM downloads the framework anonymously — no auth.
+`6.27.0-traska.78`. The repo is public, so SwiftPM downloads the framework anonymously — no auth.
 
 ### React Native / Expo app (`@maplibre/maplibre-react-native`)
 
@@ -52,10 +53,10 @@ its podspec reads (`$MLRN_SPM_SPEC` / `$MLRN_NATIVE_VERSION`) **before** `pod in
 e.g. at the top of the generated `Podfile`:
 
 ```ruby
-$MLRN_NATIVE_VERSION = "6.26.0-traska.10"
+$MLRN_NATIVE_VERSION = "6.27.0-traska.78"
 $MLRN_SPM_SPEC = {
   url: "https://github.com/coorob/maplibre-gl-native-distribution",
-  requirement: { kind: "exactVersion", version: "6.26.0-traska.10" },
+  requirement: { kind: "exactVersion", version: "6.27.0-traska.78" },
   product_name: "MapLibre",
 }
 ```
@@ -82,12 +83,11 @@ The framework is built from the source fork (recipe in `TRASKA_PMTILES_FIX.md`).
 
 ```bash
 # in the source-fork worktree, after `git submodule update --init --recursive vendor` + `npm install --ignore-scripts`:
-bazel build //platform/ios:MapLibre.dynamic \
-  --//:renderer=metal --compilation_mode=opt --copt=-g --copt=-Oz --strip=never
+bazel build -c opt //platform/ios:MapLibre.dynamic --//:renderer=metal
 ZIP=bazel-bin/platform/ios/MapLibre.dynamic.xcframework.zip
 swift package compute-checksum "$ZIP"                       # new checksum
-gh release create 6.26.0-traska.10 "$ZIP" --repo coorob/maplibre-gl-native-distribution
-# then bump url + checksum in Package.swift, commit, `git tag 6.26.0-traska.10`, push --tags
+gh release create 6.27.0-traska.78 "$ZIP" --repo coorob/maplibre-gl-native-distribution
+# then bump url + checksum in Package.swift, commit, `git tag 6.27.0-traska.78`, push --tags
 ```
 
 SwiftPM resolves `Package.swift` **at the git tag**, reads its `.binaryTarget` URL, downloads the
