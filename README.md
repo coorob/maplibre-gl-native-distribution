@@ -14,6 +14,7 @@ SwiftPM package — same product name (`MapLibre`), same public API.
 
 | Tag | Base | Fix | Slices |
 |-----|------|-----|--------|
+| `6.27.0-traska.80-rc1` | MapLibre Native [`ios-v6.27.0`](https://github.com/maplibre/maplibre-native/releases/tag/ios-v6.27.0) + Traska terrain work [`94a46bb0`](https://github.com/coorob/maplibre-native/commit/94a46bb0c9810a18fd79b7a43a27e4b84f67075c) | Release candidate: preserve a completed, carried, or neutral hillshade bake while a replacement DEM prepare target completes, preventing a contentless terrain-drape frame; pending physical iPhone acceptance | `ios-arm64` (device) + `ios-arm64_x86_64-simulator` |
 | `6.27.0-traska.78` | MapLibre Native [`ios-v6.27.0`](https://github.com/maplibre/maplibre-native/releases/tag/ios-v6.27.0) + Traska terrain work [`d709f873`](https://github.com/coorob/maplibre-native/commit/d709f8737d93059990dd25352c7281969c470c2c) | Bounded RasterDEM cover-hold retention with deterministic parent/child fallback selection; preserves fade holds and complete terrain-cover swaps while preventing historical DEM covers from growing without limit | `ios-arm64` (device) + `ios-arm64_x86_64-simulator` |
 | `6.26.0-traska.10` | MapLibre Native [`ios-v6.26.0`](https://github.com/maplibre/maplibre-native/releases/tag/ios-v6.26.0) + Traska terrain work [`1f80926a`](https://github.com/coorob/maplibre-native/commit/1f80926a) | PMTiles fixes; native Metal 3D terrain with parent drape targets, padded overscan targets, Metal draw-segment guard, and an iOS pitch-around-anchor camera API for stable terrain tilt controls | `ios-arm64` (device) + `ios-arm64_x86_64-simulator` |
 | `6.26.0-traska.9` | MapLibre Native [`ios-v6.26.0`](https://github.com/maplibre/maplibre-native/releases/tag/ios-v6.26.0) + Traska terrain work [`1b159841`](https://github.com/coorob/maplibre-native/commit/1b159841) | PMTiles fixes; native Metal 3D terrain with parent drape targets, padded overscan targets for fast camera movement, and a Metal draw-segment guard | `ios-arm64` (device) + `ios-arm64_x86_64-simulator` |
@@ -34,7 +35,7 @@ SwiftPM package — same product name (`MapLibre`), same public API.
 // Package.swift
 dependencies: [
     .package(url: "https://github.com/coorob/maplibre-gl-native-distribution.git",
-             exact: "6.27.0-traska.78"),
+             exact: "6.27.0-traska.80-rc1"),
 ],
 targets: [
     .target(name: "YourApp", dependencies: [
@@ -44,7 +45,7 @@ targets: [
 ```
 
 Or in Xcode: **File ▸ Add Package Dependencies…**, paste the URL, choose **Exact Version**
-`6.27.0-traska.78`. The repo is public, so SwiftPM downloads the framework anonymously — no auth.
+`6.27.0-traska.80-rc1`. The repo is public, so SwiftPM downloads the framework anonymously — no auth.
 
 ### React Native / Expo app (`@maplibre/maplibre-react-native`)
 
@@ -53,10 +54,10 @@ its podspec reads (`$MLRN_SPM_SPEC` / `$MLRN_NATIVE_VERSION`) **before** `pod in
 e.g. at the top of the generated `Podfile`:
 
 ```ruby
-$MLRN_NATIVE_VERSION = "6.27.0-traska.78"
+$MLRN_NATIVE_VERSION = "6.27.0-traska.80-rc1"
 $MLRN_SPM_SPEC = {
   url: "https://github.com/coorob/maplibre-gl-native-distribution",
-  requirement: { kind: "exactVersion", version: "6.27.0-traska.78" },
+  requirement: { kind: "exactVersion", version: "6.27.0-traska.80-rc1" },
   product_name: "MapLibre",
 }
 ```
@@ -86,8 +87,8 @@ The framework is built from the source fork (recipe in `TRASKA_PMTILES_FIX.md`).
 bazel build -c opt //platform/ios:MapLibre.dynamic --//:renderer=metal
 ZIP=bazel-bin/platform/ios/MapLibre.dynamic.xcframework.zip
 swift package compute-checksum "$ZIP"                       # new checksum
-gh release create 6.27.0-traska.78 "$ZIP" --repo coorob/maplibre-gl-native-distribution
-# then bump url + checksum in Package.swift, commit, `git tag 6.27.0-traska.78`, push --tags
+gh release create 6.27.0-traska.80-rc1 "$ZIP" --repo coorob/maplibre-gl-native-distribution
+# then bump url + checksum in Package.swift, commit, `git tag 6.27.0-traska.80-rc1`, push --tags
 ```
 
 SwiftPM resolves `Package.swift` **at the git tag**, reads its `.binaryTarget` URL, downloads the
