@@ -87,7 +87,7 @@ The framework is built from the source fork (recipe in `TRASKA_PMTILES_FIX.md`).
 bazel build -c opt //platform/ios:MapLibre.dynamic --//:renderer=metal
 ZIP=bazel-bin/platform/ios/MapLibre.dynamic.xcframework.zip
 swift package compute-checksum "$ZIP"                       # new checksum
-gh release create 6.27.0-traska.97 "$ZIP" --repo coorob/maplibre-gl-native-distribution
+gh release create 6.27.0-traska.97 "$ZIP#MapLibre.xcframework.zip" --repo coorob/maplibre-gl-native-distribution
 # then bump url + checksum in Package.swift, commit, `git tag 6.27.0-traska.97`, push --tags
 ```
 
